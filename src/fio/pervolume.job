@@ -1,0 +1,29 @@
+# env variable: BS, TYPE, DEVICE
+[global]
+
+group_reporting
+
+# size=200G
+time_based
+runtime=2 # seconds
+
+thread
+direct=1
+
+bs=${BS}
+rw=${TYPE}
+numjobs=1
+
+ioengine=rbd
+invalidate=0 # mandatory
+clientname=admin
+pool=nbs
+rbdname=${DEVICE}
+
+[iodepth_8]
+stonewall
+iodepth=8
+
+# [iodepth_16]
+# stonewall
+# iodepth=16
