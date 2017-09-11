@@ -5,7 +5,7 @@ group_reporting
 
 # size=200G
 time_based
-runtime=2 # seconds
+runtime=1 # seconds
 
 thread
 direct=1
@@ -20,10 +20,26 @@ clientname=admin
 pool=nbs
 rbdname=${DEVICE}
 
+[iodepth_1]
+stonewall
+iodepth=1
+
+[iodepth_4]
+stonewall
+iodepth=4
+
 [iodepth_8]
 stonewall
 iodepth=8
 
-# [iodepth_16]
-# stonewall
-# iodepth=16
+[iodepth_16]
+stonewall
+iodepth=16
+
+[iodepth_32]
+stonewall
+iodepth=32
+
+[iodepth_64]
+stonewall
+iodepth=64
