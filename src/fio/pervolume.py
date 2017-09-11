@@ -2,19 +2,21 @@
 # coding:utf-8
 
 import os
+import glob
 import subprocess
+import fio_parser
 
 # 环境变量
 BS = 'BS'
 TYPE = 'TYPE'
 DEVICE = 'DEVICE'
 
-RES_DIR = 'result'  # 存放结果的路径
+RES_DIR = 'result/pv'  # 存放结果的路径
 
 
 def init():
     if not os.path.exists(RES_DIR):
-        os.mkdir(RES_DIR)
+        subprocess.check_output(['mkdir', '-p', RES_DIR])
 
 
 def run_task(task, device):
@@ -33,9 +35,9 @@ def run_task(task, device):
         "--output-format", "json"
     ]
 
-    print '[Pervolume] start to run task (%s, %s)..' % task
+    print '[Pervolume] Start to run task (%s, %s)..' % task
     subprocess.check_output(cmd, env=new_env)
-    print '[Pervolume] the task (%s, %s) is completed' % task
+    print '[Pervolume] The task (%s, %s) is completed' % task
 
 
 def main():
@@ -43,12 +45,12 @@ def main():
     device = 'vm01'
     tasks = [
         # (BS, TYPE)
-        ('4K', 'randwrite'),
-        ('4K', 'randread'),
-        ('4K', 'readwrite'),
-        ('512K', 'write'),
-        ('512K', 'read'),
-        ('512K', 'readwrite'),
+        ('4k', 'randwrite'),
+        ('4k', 'randread'),
+        ('4k', 'readwrite'),
+        ('512k', 'write'),
+        ('512k', 'read'),
+        ('512k', 'readwrite'),
     ]
 
     init()
@@ -56,8 +58,15 @@ def main():
 
     for task in tasks:
         run_task(task, device)
-        # TODO: 清缓存
+        # TODO: 存储端drop_cache清缓存
+
+    print '[Pervolume] Start to parse result..'
+    for res in glob.glob(RES_DIR+'/*.rs'):
+        fio_parser.parse(res)
+
+    print '[Pervolume] Finished!'
 
 
 if __name__ == '__main__':
     main()
+
