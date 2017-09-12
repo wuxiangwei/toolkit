@@ -23,9 +23,27 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'brantb/solarized'
 Plugin 'majutsushi/tagbar'
+Plugin 'jszakmeister/markdown2ctags'
 call vundle#end()  " required 
 filetype plugin indent on  " required
 " End vundle
+
+" Add support for markdown files in tagbar.
+let g:tagbar_type_markdown = {
+    \ 'ctagstype': 'markdown',
+    \ 'ctagsbin' : '~/.vim/bundle/markdown2ctags/markdown2ctags.py',
+    \ 'ctagsargs' : '-f - --sort=yes',
+    \ 'kinds' : [
+        \ 's:sections',
+        \ 'i:images'
+    \ ],
+    \ 'sro' : '|',
+    \ 'kind2scope' : {
+        \ 's' : 'section',
+    \ },
+    \ 'sort': 0,
+\ }
+
 
 syntax on
 set colorcolumn=120
@@ -120,5 +138,3 @@ inoremap <silent> <C-h> <Left>
 inoremap <silent> <C-j> <Down>
 inoremap <silent> <C-k> <Up>
 inoremap <silent> <C-l> <Right>
-
-map <F5> :!dot -O -T png %<CR>
