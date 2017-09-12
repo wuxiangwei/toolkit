@@ -3,6 +3,7 @@
 
 import os
 import glob
+import time
 import subprocess
 import fio_parser
 
@@ -57,7 +58,10 @@ def main():
     # TODO: 铺底数据
 
     for task in tasks:
+        start = time.time()
         run_task(task, device)
+        elapsed = time.time() - start
+        print '[Pervolume] Elapsed time: %d (s)\r\n' % elapsed
         # TODO: 存储端drop_cache清缓存
 
     print '[Pervolume] Start to parse result..'

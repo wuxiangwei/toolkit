@@ -157,18 +157,18 @@ def main():
         ('4k', 'readwrite', 'iodepth_16'),
         ('4k', 'readwrite', 'iodepth_32'),
         ('4k', 'readwrite', 'iodepth_64'),
-        ('512k', 'randread', 'iodepth_1'),
-        ('512k', 'randread', 'iodepth_4'),
-        ('512k', 'randread', 'iodepth_8'),
-        ('512k', 'randread', 'iodepth_16'),
-        ('512k', 'randread', 'iodepth_32'),
-        ('512k', 'randread', 'iodepth_64'),
-        ('512k', 'randwrite', 'iodepth_1'),
-        ('512k', 'randwrite', 'iodepth_4'),
-        ('512k', 'randwrite', 'iodepth_8'),
-        ('512k', 'randwrite', 'iodepth_16'),
-        ('512k', 'randwrite', 'iodepth_32'),
-        ('512k', 'randwrite', 'iodepth_64'),
+        ('512k', 'read', 'iodepth_1'),
+        ('512k', 'read', 'iodepth_4'),
+        ('512k', 'read', 'iodepth_8'),
+        ('512k', 'read', 'iodepth_16'),
+        ('512k', 'read', 'iodepth_32'),
+        ('512k', 'read', 'iodepth_64'),
+        ('512k', 'write', 'iodepth_1'),
+        ('512k', 'write', 'iodepth_4'),
+        ('512k', 'write', 'iodepth_8'),
+        ('512k', 'write', 'iodepth_16'),
+        ('512k', 'write', 'iodepth_32'),
+        ('512k', 'write', 'iodepth_64'),
         ('512k', 'readwrite', 'iodepth_1'),
         ('512k', 'readwrite', 'iodepth_4'),
         ('512k', 'readwrite', 'iodepth_8'),
@@ -180,7 +180,10 @@ def main():
     init()
 
     for task in tasks:
+        start = time.time()
         run_task(task)
+        elapsed = time.time() - start
+        LOG('Elapsed time: %d(s)\r\n' % elapsed)
         parse_task_result(task)
 
 
