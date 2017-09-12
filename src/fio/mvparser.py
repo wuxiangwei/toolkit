@@ -85,8 +85,8 @@ def main():
         ('4k', 'randwrite'),
         ('4k', 'randread'),
         ('4k', 'readwrite'),
-        ('512k', 'randwrite'),
-        ('512k', 'randread'),
+        ('512k', 'write'),
+        ('512k', 'read'),
         ('512k', 'readwrite'),
     ]
 
