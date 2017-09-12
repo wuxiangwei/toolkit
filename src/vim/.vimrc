@@ -23,10 +23,16 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'brantb/solarized'
 Plugin 'majutsushi/tagbar'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'jszakmeister/markdown2ctags'
+Plugin 'joker1007/vim-markdown-quote-syntax'
 call vundle#end()  " required 
 filetype plugin indent on  " required
 " End vundle
+
+set conceallevel=2
+let g:vim_markdown_folding_disabled = 1
 
 " Add support for markdown files in tagbar.
 let g:tagbar_type_markdown = {
@@ -43,6 +49,29 @@ let g:tagbar_type_markdown = {
     \ },
     \ 'sort': 0,
 \ }
+
+
+" let g:markdown_quote_syntax_filetypes = {
+"         \ "coffee" : {
+"         \   "start" : "coffee",
+"         \},
+"         \ "css" : {
+"         \   "start" : "\\%(css\\|scss\\)",
+"         \},
+"         \ "mustache" : {
+"         \   "start" : "mustache",
+"         \},
+"         \ "haml" : {
+"         \   "start" : "haml",
+"         \},
+"   \}
+" 
+"  let g:markdown_quote_syntax_codeblocks = {
+"          \["^\\s*{% *highlight \\+", "\\( .*%\\|%\\)}",
+"            \"^\\s*{% *endhighlight\\( .*%\\|%\\)}"],
+"  \}
+
+let g:markdown_quote_syntax_on_filetypes = ['text']
 
 
 syntax on
