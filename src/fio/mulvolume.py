@@ -85,6 +85,7 @@ def parse_task_result(task):
 
     # 解析每个fio的结果
     for res in glob.glob(res_path):
+        LOG('Parse %s ..'%res)
         fio_parser.parse(res)
 
     # 累加所有结果
