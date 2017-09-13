@@ -22,14 +22,6 @@ def main():
         LOG('Start to run command %s' % cmd)
         subprocess.check_output(cmd, shell=True)
 
-    if not os.path.exists('~/.vim/bundle/Vundle.vim'):
-        cmd = [
-            'git', 'clone', 
-            'https://github.com/VundleVim/Vundle.vim.git',
-            '~/.vim/bundle/Vundle.vim',
-        ]
-        subprocess.check_output(cmd)
-
     LOG('Finished!!')
 
 

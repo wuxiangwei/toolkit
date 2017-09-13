@@ -13,11 +13,21 @@ TYPE = 'TYPE'
 DEVICE = 'DEVICE'
 
 RES_DIR = 'result/pv'  # 存放结果的路径
+PV_RES_DIR = 'result/pv-result'
+
+
+def log(msg):
+    print '[Pervolume] %s' % msg
+
+LOG = lambda msg: log(msg)
 
 
 def init():
     if not os.path.exists(RES_DIR):
         subprocess.check_output(['mkdir', '-p', RES_DIR])
+
+    if not os.path.exists(PV_RES_DIR):
+        subprocess.check_output(['mkdir', '-p', PV_RES_DIR])
 
 
 def run_task(task, device):
@@ -36,9 +46,9 @@ def run_task(task, device):
         "--output-format", "json"
     ]
 
-    print '[Pervolume] Start to run task (%s, %s)..' % task
+    LOG('Start to run task (%s, %s)..' % task)
     subprocess.check_output(cmd, env=new_env)
-    print '[Pervolume] The task (%s, %s) is completed' % task
+    LOG('The task (%s, %s) is completed' % task)
 
 
 def main():
@@ -61,14 +71,19 @@ def main():
         start = time.time()
         run_task(task, device)
         elapsed = time.time() - start
-        print '[Pervolume] Elapsed time: %d (s)\r\n' % elapsed
+        LOG('Elapsed time: %d (s)\r\n' % elapsed)
         # TODO: 存储端drop_cache清缓存
 
-    print '[Pervolume] Start to parse result..'
+    LOG('Start to parse result..')
     for res in glob.glob(RES_DIR+'/*.rs'):
         fio_parser.parse(res)
+        src_fn = res.split('/')[-1]
+        src_fn = src_fn.split('.')[-2] + '.csv'
+        src_fpath = os.path.join(RES_DIR, src_fn)
+        dst_fpath = os.path.join(PV_RES_DIR, src_fn)
+        os.rename(src_fpath, dst_fpath)
 
-    print '[Pervolume] Finished!'
+    LOG('Finished!')
 
 
 if __name__ == '__main__':

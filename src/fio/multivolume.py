@@ -7,22 +7,27 @@ import glob
 import fio_parser
 import subprocess
 
+# 环境变量
 BS = 'BS'
 TYPE = 'TYPE'
 DEVICE = 'DEVICE'
 
-DEVICE_NUM = 10  # 参与测试块的数量
-CEPH_POOL = 'nbs'
-RES_DIR = 'result/mv'
+# 测试参数
+DEVICE_NUM = 5  # 参与测试块的数量
+CEPH_POOL = 'nbs'  # 测试块所在的存储池
+FIO_RES_DIR = 'result/mv'  # 存放fio结果的路径
+MANUAL_TASK = True  # 手动任务，在多台主机运行时，手动来同步任务
 
 
-def LOG(msg):
+def log(msg):
     print '[Multivolume] %s' % msg
+
+LOG = lambda msg: log(msg)
 
 
 def init():
-    if not os.path.exists(RES_DIR):
-        subprocess.check_output(['mkdir', '-p', RES_DIR])
+    if not os.path.exists(FIO_RES_DIR):
+        subprocess.check_output(['mkdir', '-p', FIO_RES_DIR])
 
 
 def get_devices():
@@ -36,14 +41,14 @@ def get_devices():
     for device in ret:
         # create device if not exists
         if device not in devices:
-            subprocess.check_output(['rbd', 'create', '%s/%s' % (CEPH_POOL, device), '--size', '10G'])
+            subprocess.check_output(['rbd', 'create', '%s/%s' % (CEPH_POOL, device), '--size', '10240'])
 
     return ret
 
 
 def _run_task(task, device):
     fn = 'mv-' + '-'.join(task) + '-' +  device + '.rs'
-    fpath = os.path.join(RES_DIR, fn)
+    fpath = os.path.join(FIO_RES_DIR, fn)
 
     new_env = os.environ.copy()
     new_env[BS] = task[0]
@@ -81,7 +86,7 @@ def run_task(task):
 
 def parse_task_result(task):
     res_fn = 'mv-' + '-'.join(task) + '-*.rs'
-    res_path = os.path.join(RES_DIR, res_fn)
+    res_path = os.path.join(FIO_RES_DIR, res_fn)
 
     # 解析每个fio的结果
     for res in glob.glob(res_path):
@@ -100,7 +105,7 @@ def parse_task_result(task):
     }
 
     csv_fn = 'mv-' + '-'.join(task) + '-*.csv'
-    csv_path = os.path.join(RES_DIR, csv_fn)
+    csv_path = os.path.join(FIO_RES_DIR, csv_fn)
     for csv in glob.glob(csv_path):
         with open(csv, 'r') as fd:
             lines = fd.readlines()
@@ -118,7 +123,7 @@ def parse_task_result(task):
 
     # 写到文件
     fn = 'mv-' + '-'.join(task) + '.csv'
-    fpath = os.path.join(RES_DIR, fn)
+    fpath = os.path.join(FIO_RES_DIR, fn)
     with open(fpath, 'w') as fd:
         write_bw_str = 'write_bw, ' + str(summary['write_bw']) + '\r\n'
         write_iops_str = 'write_iops, ' + str(summary['write_iops']) + '\r\n'
@@ -181,11 +186,20 @@ def main():
     init()
 
     for task in tasks:
+        while MANUAL_TASK:
+            nt = raw_input('\r\n[Multivolume] Please input <Enter> to run task.. ')
+            if nt == '':
+                break
+
         start = time.time()
         run_task(task)
         elapsed = time.time() - start
-        LOG('Elapsed time: %d(s)\r\n' % elapsed)
         parse_task_result(task)
+        LOG('Elapsed time: %d(s)' % elapsed)
+    
+    import mvparser
+    mvparser.main()
+    LOG('Finished!!')
 
 
 if __name__ == '__main__':
