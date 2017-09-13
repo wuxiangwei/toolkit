@@ -16,6 +16,13 @@ else
     set fileencoding=utf-8
 endif
 
+" GUI设置
+if has("gui_running")
+    set guioptions-=m " 菜单栏
+    set guioptions-=T " 工具栏
+    " set guioptions-=r " 滚动栏
+endif
+
 " Begin vundle
 filetype off  " required
 call vundle#begin()
@@ -50,32 +57,11 @@ let g:tagbar_type_markdown = {
     \ 'sort': 0,
 \ }
 
-
-" let g:markdown_quote_syntax_filetypes = {
-"         \ "coffee" : {
-"         \   "start" : "coffee",
-"         \},
-"         \ "css" : {
-"         \   "start" : "\\%(css\\|scss\\)",
-"         \},
-"         \ "mustache" : {
-"         \   "start" : "mustache",
-"         \},
-"         \ "haml" : {
-"         \   "start" : "haml",
-"         \},
-"   \}
-" 
-"  let g:markdown_quote_syntax_codeblocks = {
-"          \["^\\s*{% *highlight \\+", "\\( .*%\\|%\\)}",
-"            \"^\\s*{% *endhighlight\\( .*%\\|%\\)}"],
-"  \}
-
+let g:tagbar_autofocus = 1
 let g:markdown_quote_syntax_on_filetypes = ['text']
 
-
 syntax on
-set colorcolumn=120
+set colorcolumn=80
 set t_Co=256
 colorscheme solarized " 设置背景方案
 set background=dark " light\dark
@@ -86,7 +72,7 @@ let g:solarized_visibility="high"
 set guifontset=
 set guifont=Source_Code_Pro:h11:cANSI
 
-nmap <F8> :TagbarToggle<CR>
+nmap <F9> :TagbarToggle<CR>
 
 set cmdheight=2
 set cmdheight=2
@@ -146,17 +132,8 @@ set noswapfile
 nnoremap zc @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
 " 自动括号
-"
 inoremap ( ()<ESC>i
 inoremap { {}<ESC>i
-
-" GUI设置
-if has("gui_running")
-    set guioptions-=m " 菜单栏
-    set guioptions-=T " 工具栏
-    " set guioptions-=r " 滚动栏
-endif
-
 
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
