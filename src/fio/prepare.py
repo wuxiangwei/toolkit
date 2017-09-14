@@ -8,10 +8,11 @@ def log(msg):
     print '[Prepare] %s' % msg
 
 LOG = lambda msg: log(msg)
-DEVICE_NUM = 200
+DEVICE_NUM = 25
 CEPH_POOL = 'nbs'
-CEPH_DEVICE_SIZE = 100 * 1024 # 100G
-MAX_CONCURRENT_TASK_NUM = 20
+CEPH_DEVICE_SIZE = 100 * 1024  # 100G
+# NOTE: 经测试，4个并发，在集群不饱和的情况可以打满客户端10Gb的网卡
+MAX_CONCURRENT_TASK_NUM = 4
 
 
 def get_test_devices():
