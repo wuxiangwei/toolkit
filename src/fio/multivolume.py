@@ -13,10 +13,14 @@ TYPE = 'TYPE'
 DEVICE = 'DEVICE'
 
 # 测试参数
-DEVICE_NUM = 15  # 参与测试块的数量
+DEVICE_NUM = 50  # 参与测试块的数量
+BIG_BS_DEVICE_NUM = 4
+SMALL_BS_DEVICE_NUM = 25
 CEPH_POOL = 'nbs'  # 测试块所在的存储池
 FIO_RES_DIR = 'result/mv'  # 存放fio结果的路径
 MANUAL_TASK = False # 手动任务，在多台主机运行时，手动来同步任务
+CLIENT_NUM = 2  # 测试客户端的数量
+CLIENT_ID = 0  # 当前客户端的编号
 
 
 def log(msg):
@@ -32,7 +36,7 @@ def init():
 
 def get_devices():
     ret = []
-    for i in xrange(1, DEVICE_NUM):
+    for i in xrange(1, 1+DEVICE_NUM):
         ret.append('vm%d' % i)
 
     out = subprocess.check_output(['rbd', 'list', CEPH_POOL])
@@ -43,6 +47,18 @@ def get_devices():
         if device not in devices:
             subprocess.check_output(['rbd', 'create', '%s/%s' % (CEPH_POOL, device), '--size', '10240'])
 
+    return ret
+
+
+def get_test_devices(task):
+    bs = task[0]
+    all_devices = get_devices()
+    client_device_num = DEVICE_NUM / CLIENT_NUM
+    start_index = client_device_num * CLIENT_ID
+    client_devices = all_devices[start_index: start_index+client_device_num]
+    LOG("%d, %d, %d, %d" % (start_index, client_device_num, len(client_devices), len(all_devices)))
+    # note: 越界检查
+    ret = client_devices[0:SMALL_BS_DEVICE_NUM] if bs == '4k' else client_devices[0:BIG_BS_DEVICE_NUM]
     return ret
 
 
@@ -69,7 +85,8 @@ def _run_task(task, device):
 
 
 def run_task(task):
-    devices = get_devices()
+    devices = get_test_devices(task)
+    LOG(str(devices))
     wait_list = {}
     for device in devices:
         p = _run_task(task, device)
