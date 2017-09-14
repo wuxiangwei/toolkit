@@ -15,7 +15,7 @@ def main():
     cmds = [
         'mkdir -p ~/.vim',
         'cp .vimrc ~/',
-        'apt-get install ctags',
+        'sudo apt-get install ctags',
     ]
 
     for cmd in cmds:

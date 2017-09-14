@@ -53,7 +53,7 @@ def run_task(task, device):
 
 def main():
     
-    device = 'vm01'
+    device = 'vm1'
     tasks = [
         # (BS, TYPE)
         ('4k', 'randwrite'),

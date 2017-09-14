@@ -13,10 +13,10 @@ TYPE = 'TYPE'
 DEVICE = 'DEVICE'
 
 # 测试参数
-DEVICE_NUM = 5  # 参与测试块的数量
+DEVICE_NUM = 15  # 参与测试块的数量
 CEPH_POOL = 'nbs'  # 测试块所在的存储池
 FIO_RES_DIR = 'result/mv'  # 存放fio结果的路径
-MANUAL_TASK = True  # 手动任务，在多台主机运行时，手动来同步任务
+MANUAL_TASK = False # 手动任务，在多台主机运行时，手动来同步任务
 
 
 def log(msg):
