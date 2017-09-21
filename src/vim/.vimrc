@@ -34,6 +34,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'jszakmeister/markdown2ctags'
 Plugin 'joker1007/vim-markdown-quote-syntax'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
 call vundle#end()  " required 
 filetype plugin indent on  " required
 " End vundle
@@ -73,6 +75,14 @@ set guifontset=
 set guifont=Source_Code_Pro:h11:cANSI
 
 nmap <F9> :TagbarToggle<CR>
+
+nmap <F10> :NERDTreeToggle<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+set tags=tags;
+set autochdir
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
 
 set cmdheight=2
 set cmdheight=2
@@ -144,3 +154,4 @@ inoremap <silent> <C-h> <Left>
 inoremap <silent> <C-j> <Down>
 inoremap <silent> <C-k> <Up>
 inoremap <silent> <C-l> <Right>
+
