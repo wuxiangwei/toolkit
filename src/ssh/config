@@ -1,0 +1,86 @@
+# 00 跳板机
+# 01 测试环境
+
+# 02 线上环境
+#   |-- 01 私有云
+#   |    |-- 01 东冠私有云
+#   |    |-- 02 义桥私有云
+#   |    |-- 03 萧山b私有云
+#   |-- 02 公有云
+
+# 03 物理测试机
+
+Host 10-180-0-49
+    # shuttle.name = 03 物理测试机/10-180-0-49
+    HostName 115.236.124.49
+
+Host 10-180-0-30
+    # shuttle.name = 03 物理测试机/10-180-0-30
+    HostName 115.236.124.30
+
+Host 10-180-0-31
+    # shuttle.name = 03 物理测试机/10-180-0-31
+    HostName 115.236.124.31
+
+Host 10-180-0-35
+    # shuttle.name = 03 物理测试机/10-180-0-35
+    HostName 115.236.124.35
+
+Host 10-180-0-36
+    # shuttle.name = 03 物理测试机/10-180-0-36
+    HostName 115.236.124.36
+
+Host 10-180-0-46
+    # shuttle.name = 03 物理测试机/10-180-0-46
+    HostName 115.236.124.46
+
+# 04 虚拟机
+
+Host ceph1
+    # shuttle.name = 04 虚拟机/debian8/ceph1
+    User root
+    HostName 10.18.192.20
+    Port 22
+
+Host ceph2
+    # shuttle.name = 04 虚拟机/debian8/ceph2
+    User root
+    HostName 10.18.192.21
+    Port 22
+
+Host ceph3
+    # shuttle.name = 04 虚拟机/debian8/ceph3
+    User root
+    HostName 10.18.192.22
+    Port 22
+
+Host compiler2
+    # shuttle.name = 04 虚拟机/debian8/compiler2
+    User root
+    HostName 10.18.192.19
+    Port 22
+
+Host node1
+    # shuttle.name = 04 虚拟机/debian7/node1
+    User root
+    HostName 10.18.192.14
+    Port 22
+
+Host vm02
+    # shuttle.name = 04 虚拟机/debian8/vm02
+    User root
+    HostName 10.18.192.17
+    Port 22
+
+Host w2
+    # shuttle.name = 04 虚拟机/debian9/w2
+    User root
+    HostName 10.18.192.24
+    Port 22
+
+# single host
+
+Host pubt1-sa1.yq.163.com
+    User wuxiangwei
+    HostName 115.238.122.38
+    Port 1046
