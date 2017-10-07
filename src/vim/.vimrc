@@ -36,9 +36,15 @@ Plugin 'jszakmeister/markdown2ctags'
 Plugin 'joker1007/vim-markdown-quote-syntax'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'tpope/vim-surround'
+Plugin 'Lokaltog/vim-powerline'
+
 call vundle#end()  " required 
 filetype plugin indent on  " required
 " End vundle
+
+let g:Powerline_symbols = 'fancy'
 
 set conceallevel=2
 let g:vim_markdown_folding_disabled = 1
@@ -127,6 +133,8 @@ set winaltkeys=no " Window中alt键来选择编辑器的菜单
 filetype on
 filetype plugin on
 filetype indent on
+
+au BufRead,BufNewFile SConstruct set filetype=python
 
 set autoread " 设置当文件被改动时自动载入
 set autowrite " 自动保存
