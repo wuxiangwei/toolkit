@@ -4,7 +4,8 @@ set fileformat=unix
 set relativenumber
 
 set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=~/.vim/bundle/solarized/vim-colors-solarized  " colors
+" set rtp+=~/.vim/bundle/solarized/vim-colors-solarized  " colors
+set rtp+=~/.vim/bundle/ethanschoonover.com/projects/solarized/vim-colors-solarized " colors
 
 if has("win32")
     set fileencoding=chinese
@@ -28,7 +29,8 @@ filetype off  " required
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'brantb/solarized'
+" Plugin 'brantb/solarized'
+Plugin 'altercation/ethanschoonover.com'
 Plugin 'majutsushi/tagbar'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
