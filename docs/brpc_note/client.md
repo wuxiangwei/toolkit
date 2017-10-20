@@ -51,6 +51,8 @@ Controller 用于在某次RPC中覆盖ChannelOptions中的选项，可根据上�
 
 **server**
 
+1. 请求、回复、服务的接口均定义在proto文件中；
+2. 
 
 **连接方式**
 
@@ -74,4 +76,25 @@ Controller 用于在某次RPC中覆盖ChannelOptions中的选项，可根据上�
 3. zlib，速度比gzip快比snappy慢，压缩率比gzip高
 
 具体比较，参考https://github.com/brpc/brpc/blob/master/docs/cn/client.md
+
+
+**Channel**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
