@@ -6,6 +6,7 @@ set relativenumber
 set rtp+=~/.vim/bundle/Vundle.vim
 " set rtp+=~/.vim/bundle/solarized/vim-colors-solarized  " colors
 set rtp+=~/.vim/bundle/ethanschoonover.com/projects/solarized/vim-colors-solarized " colors
+set rtp+=~/.vim/bundle/molokai
 
 if has("win32")
     set fileencoding=chinese
@@ -41,6 +42,11 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-powerline'
+Plugin 'Yggdroot/LeaderF'
+Plugin 'brookhong/cscope.vim'
+Plugin 'tomasr/molokai'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'SirVer/ultisnips'
 
 call vundle#end()  " required 
 filetype plugin indent on  " required
@@ -73,7 +79,8 @@ let g:markdown_quote_syntax_on_filetypes = ['text']
 syntax on
 set colorcolumn=80
 set t_Co=256
-colorscheme solarized " 设置背景方案
+" colorscheme solarized " 设置背景方案
+colorscheme molokai " 设置背景方案
 set background=dark " light\dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
@@ -86,8 +93,8 @@ nmap <F9> :TagbarToggle<CR>
 
 nmap <F10> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 set tags=tags;
 set autochdir
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
