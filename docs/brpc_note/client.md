@@ -82,15 +82,26 @@ Controller 用于在某次RPC中覆盖ChannelOptions中的选项，可根据上�
 
 
 
+**内建服务**
+
+目标：提高开发调试效率，通过多种形式展现服务内部状态。
+
+主要服务：
+1. status
+2. vars
+3. connections 查看所有连接的状态；
+4. flags 查看配置，brpc的配置使用gflag来管理；
+5. rpcz
+6. cpu profiler 分析cpu热点
+7. heap profiler 分析内存热点
+8. cotention profiler 分析锁竞争
 
 
+**IO操作方式**
 
-
-
-
-
-
-
+1. blocking io 阻塞当前线程；
+2. asynchronous io 不阻塞当前线程，使用回调处理结果；
+3. non-blocking io 批量同步，用户阻塞等待多个asynchronous io完成。
 
 
 
