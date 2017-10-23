@@ -1,4 +1,3 @@
-
 protobuf定义3种接口，接口交由上层应用根据自己的业务来实现：
 
 1. request
@@ -37,14 +36,12 @@ Socket
 Stream
     |-- _host_socket: Socket*
 
-
 Channel
     |-- _server_address // 服务地址，Init时传入
     |-- _server_id // socket在ResourcePool中的索引
 
 Channel::Init() --> SocketMapInsert() --> SocketMap::Insert() --> 
-1. SocketCreator::CreateSocket() --> InputMessenger::Create() --> Socket::Create() --> ResourcePool<T>::singleton()::get_resource()  // 使用资源池管理socket实例
-2. 
+SocketCreator::CreateSocket() --> InputMessenger::Create() --> Socket::Create() --> ResourcePool<T>::singleton()::get_resource()  // 使用资源池管理socket实例
  
 Controller
     |-- _request_protocol  // RPC协议
@@ -67,7 +64,6 @@ Channel::CallMethod() -->
 
 Socket::Write() --> Socket::StartWrite() --> Stream::CutMessageIntoFileDescriptor() --> Stream::WriteToHostSocket()
 ```
-
 
 
 **Server**
@@ -118,9 +114,7 @@ ProcessRpcRequest(msg) -->
 
 一次读取的字节大小：
 1. 总体范围在4K到512K之间；
-2. 
-
-
+2. 如果完成一个message的读取，CutInputMessage返回为ok，否则返回错误，继续读取；
 
 
 **事件分发** Event dispatcher
