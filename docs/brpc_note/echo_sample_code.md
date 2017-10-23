@@ -69,6 +69,60 @@ Socket::Write() --> Socket::StartWrite() --> Stream::CutMessageIntoFileDescripto
 ```
 
 
+
+**Server**
+
+
+启动服务：
+```
+InputMessenger
+    |-- _handler: InputMessageHandler
+
+main() -> 
+1. Server::AddService
+2. Server::Start() --> Server::StartInternal() --> 
+    2.1 Server::BuildAcceptor() // 创建Acceptor，加载protocol到Acceptor；Acceptor is a InputMessenger，协议作为InputMessageHandler
+    2.2 Acceptor::StartAccept() --> Socket::Create() --> Socket::ResetFileDescriptor()  // 添加listen_fd到epoll
+```
+listen_fd的回调函数为`Acceptor::OnNewConnections`，
+
+1. 一个server只能监听一个端口，如果要监听N个端口，要起N个server；
+2. 启动1个server时可以提供1个port范围，server从中选择1个可用的；类似ceph-osd，一个主机中跑多个ceph-osd进程，每个进程使用不同的端口；
+
+处理新连接：
+```
+Acceptor::OnNewConnections() --> Acceptor::OnNewConnectionsUntilEAGAIN()  // 添加新连接的socket fd到epoll
+```
+来自新连接的消息的处理函数为`InputMessenger::OnNewMessages`。
+
+
+处理来自连接的消息：
+```
+InputMessenger::OnNewMessages() --> 
+1. Socket::DoRead()  // 读取一部分数据
+2. InputMessenger::CutInputMessage()  // 使用不同的protocol来parse消息，将成功的protocol记录到Socket的_preferred_index，下次优先使用该协议来解析；
+3. QueueMessage() --> ProcessInputMessage() --> InputMessageBase::_process() // 调用具体protocol的ProcessRpcRequest接口
+
+以baidu_std协议为例, msg包含server实例的指针：
+
+Server
+    |-- _method_map
+
+ProcessRpcRequest(msg) --> 
+1. ServerPrivateAccessor::FindMethodPropertyByFullName() --> Server::FindMethodPropertyByFullName() // 从server中找到对应method和Service
+2. google::protobuf::Service::GetRequestPrototype().New() // 根据method构建出对应的请求实例；
+3. ParseFromCompressedData() --> ParsePbFromIOBuf() // 解压payload，填充请求实例；
+4. google::protobuf::Service::CallMethod() // 调用具体方法
+5. SendRpcResponse() // 回复响应
+```
+
+一次读取的字节大小：
+1. 总体范围在4K到512K之间；
+2. 
+
+
+
+
 **事件分发** Event dispatcher
 
 ```

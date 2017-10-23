@@ -47,6 +47,9 @@ Plugin 'brookhong/cscope.vim'
 Plugin 'tomasr/molokai'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'SirVer/ultisnips'
+Plugin 'derekwyatt/vim-fswitch'
+Plugin 'vim-scripts/AutoClose'
+Plugin 'kien/rainbow_parentheses.vim'
 
 call vundle#end()  " required 
 filetype plugin indent on  " required
