@@ -37,7 +37,6 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'jszakmeister/markdown2ctags'
 Plugin 'joker1007/vim-markdown-quote-syntax'
-Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-surround'
@@ -50,10 +49,18 @@ Plugin 'SirVer/ultisnips'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'vim-scripts/AutoClose'
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'chazy/cscope_maps'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'bronson/vim-trailing-whitespace'
 
-call vundle#end()  " required 
+call vundle#end()  " required
 filetype plugin indent on  " required
 " End vundle
+
+
+set cscopequickfix=c-,d-,e-,g-,i-,s-,t-
 
 let g:Powerline_symbols = 'fancy'
 
@@ -79,6 +86,31 @@ let g:tagbar_type_markdown = {
 let g:tagbar_autofocus = 1
 let g:markdown_quote_syntax_on_filetypes = ['text']
 
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 syntax on
 set colorcolumn=80
 set t_Co=256
@@ -98,6 +130,15 @@ nmap <F10> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+let NERDTreeShowLineNumbers=1
+let NERDTreeAutoCenter=1
+let NERDTreeShowHidden=1
+let NERDTreeWinSize=31
+let g:nerdtree_tabs_open_on_console_startup=1
+let NERDTreeIgnores=['\.pyc','\~$','\.swp']
+let NERDTreeShowBookmarks=1
+
+
 set tags=tags;
 set autochdir
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
@@ -117,7 +158,7 @@ set cindent
 set tabstop=4 " 制表符为4
 set softtabstop=4 " 按backspace按键时可以删掉4个空格
 set shiftwidth=4 " 设置<<或>>移动的宽度为4
-set shiftround " 
+set shiftround "
 set expandtab
 set smarttab " 为C程序提供自动缩进
 set number
@@ -126,7 +167,7 @@ set textwidth=120 " 设置每行120个字符自动换行
 set autochdir " 自动切换当前目录为当前文件所在目录
 " Search and Case
 set hlsearch " 高亮
-set incsearch 
+set incsearch
 set ignorecase " 忽略大小写
 set whichwrap+=<,>,h,l " 光标滑动到行的首尾时，左右滑动可以移动到上下行
 set showmatch " 高亮显示匹配的括号
@@ -175,4 +216,3 @@ inoremap <silent> <C-h> <Left>
 inoremap <silent> <C-j> <Down>
 inoremap <silent> <C-k> <Up>
 inoremap <silent> <C-l> <Right>
-
