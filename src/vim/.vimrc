@@ -139,7 +139,7 @@ let NERDTreeShowLineNumbers=1
 let NERDTreeAutoCenter=1
 let NERDTreeShowHidden=1
 let NERDTreeWinSize=31
-let g:nerdtree_tabs_open_on_console_startup=1
+" let g:nerdtree_tabs_open_on_console_startup=1
 let NERDTreeIgnores=['\.pyc','\~$','\.swp']
 let NERDTreeShowBookmarks=1
 
