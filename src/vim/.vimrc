@@ -54,6 +54,11 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'vim-scripts/c.vim'
+Plugin 'python-mode/python-mode'
+Plugin 'Raimondi/delimitMate'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'scrooloose/nerdcommenter'
 
 call vundle#end()  " required
 filetype plugin indent on  " required
