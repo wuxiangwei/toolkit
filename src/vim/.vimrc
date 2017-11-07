@@ -30,6 +30,7 @@ filetype off  " required
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'vimwiki/vimwiki'
 " Plugin 'brantb/solarized'
 Plugin 'altercation/ethanschoonover.com'
 Plugin 'majutsushi/tagbar'
@@ -59,13 +60,20 @@ Plugin 'python-mode/python-mode'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'hashrocket/vim-macdown'
 
 call vundle#end()  " required
 filetype plugin indent on  " required
 " End vundle
 
 
-set cscopequickfix=c-,d-,e-,g-,i-,s-,t-
+set cscopequickfix=c-,d-,e-,g-,i-,s-,t- " 显示在quickfix窗口，并且清空先前的显示结果
+set cst  " cscopetag
+set csto=0 " cscopeorder
+set cspc=3 " 显示路径，显示路径的最后3个部分
+
+" let g:Lf_DefaultMode = 'FullPath'
+let g:Lf_DefaultMode = 'Fuzzy'
 
 let g:Powerline_symbols = 'fancy'
 
@@ -146,7 +154,7 @@ let NERDTreeShowBookmarks=1
 
 set tags=tags;
 set autochdir
-map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+" map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 
 set cmdheight=2
