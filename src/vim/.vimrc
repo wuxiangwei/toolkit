@@ -30,7 +30,6 @@ filetype off  " required
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'vimwiki/vimwiki'
 " Plugin 'brantb/solarized'
 Plugin 'altercation/ethanschoonover.com'
 Plugin 'majutsushi/tagbar'
@@ -67,20 +66,8 @@ filetype plugin indent on  " required
 " End vundle
 
 
-set cscopequickfix=c-,d-,e-,g-,i-,s-,t- " 显示在quickfix窗口，并且清空先前的显示结果
-set cst  " cscopetag
-set csto=0 " cscopeorder
-set cspc=3 " 显示路径，显示路径的最后3个部分
-
-" let g:Lf_DefaultMode = 'FullPath'
-let g:Lf_DefaultMode = 'Fuzzy'
-
-let g:Powerline_symbols = 'fancy'
-
-set conceallevel=2
-let g:vim_markdown_folding_disabled = 1
-
-" Add support for markdown files in tagbar.
+" tagbar配置
+" 增加tagbar对markdown文件的支持
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
     \ 'ctagsbin' : '~/.vim/bundle/markdown2ctags/markdown2ctags.py',
@@ -96,7 +83,31 @@ let g:tagbar_type_markdown = {
     \ 'sort': 0,
 \ }
 
-let g:tagbar_autofocus = 1
+" 打开tagbar
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1  " 打开tagbar时关闭自动到tagbar窗口
+let g:tagbar_autoclose = 1  " 跳转后直接关闭tagbar窗口
+
+
+" 对指定后缀的文件，自动打开tagbar窗口
+autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.md,*.py call tagbar#autoopen()
+
+
+"" cscope配置
+set cscopequickfix=c-,d-,e-,g-,i-,s-,t- " 显示在quickfix窗口，并且清空先前的显示结果
+set cst  " cscopetag
+set csto=0 " cscopeorder
+set cspc=3 " 显示路径，显示路径的最后3个部分
+
+" let g:Lf_DefaultMode = 'FullPath'
+let g:Lf_DefaultMode = 'Fuzzy'
+
+let g:Powerline_symbols = 'fancy'
+
+set conceallevel=2
+let g:vim_markdown_folding_disabled = 1
+
+
 let g:markdown_quote_syntax_on_filetypes = ['text']
 
 let g:rbpt_colorpairs = [
@@ -128,7 +139,8 @@ syntax on
 set colorcolumn=80
 set t_Co=256
 " colorscheme solarized " 设置背景方案
-colorscheme molokai " 设置背景方案
+" colorscheme molokai " 设置背景方案
+colorscheme ron " 设置背景方案
 set background=dark " light\dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
@@ -137,7 +149,6 @@ let g:solarized_visibility="high"
 set guifontset=
 set guifont=Source_Code_Pro:h11:cANSI
 
-nmap <F9> :TagbarToggle<CR>
 
 nmap <F10> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
