@@ -54,7 +54,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'vim-scripts/c.vim'
+" Plugin 'vim-scripts/c.vim'
 Plugin 'python-mode/python-mode'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Chiel92/vim-autoformat'
@@ -82,13 +82,10 @@ let g:tagbar_type_markdown = {
     \ },
     \ 'sort': 0,
 \ }
-
 " 打开tagbar
 nmap <F8> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1  " 打开tagbar时关闭自动到tagbar窗口
+let g:tagbar_autofocus = 0  " 打开tagbar时光标自动到tagbar窗口
 let g:tagbar_autoclose = 1  " 跳转后直接关闭tagbar窗口
-
-
 " 对指定后缀的文件，自动打开tagbar窗口
 autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.md,*.py call tagbar#autoopen()
 
@@ -99,8 +96,13 @@ set cst  " cscopetag
 set csto=0 " cscopeorder
 set cspc=3 " 显示路径，显示路径的最后3个部分
 
+
+" Leaderf配置
 " let g:Lf_DefaultMode = 'FullPath'
 let g:Lf_DefaultMode = 'Fuzzy'
+let g:Lf_RootMarkers = ['.git']
+" 当前工作目录为最近的.git所在目录，避免使用当前路径找不到其它目录中的文件
+let g:Lf_WorkingDirectoryMode = 'a'  
 
 let g:Powerline_symbols = 'fancy'
 
@@ -228,15 +230,58 @@ set noswapfile
 nnoremap zc @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
 " 自动括号
-inoremap ( ()<ESC>i
-inoremap { {}<ESC>i
+" inoremap ( ()<ESC>i
+" inoremap { {}<ESC>i
+" nnoremap <leader>h <C-w>h
+" nnoremap <leader>j <C-w>j
+" nnoremap <leader>k <C-w>k
+" nnoremap <leader>l <C-w>l
+" inoremap <silent> <C-h> <Left>
+" inoremap <silent> <C-j> <Down>
+" inoremap <silent> <C-k> <Up>
+" inoremap <silent> <C-l> <Right>
 
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
 
-inoremap <silent> <C-h> <Left>
-inoremap <silent> <C-j> <Down>
-inoremap <silent> <C-k> <Up>
-inoremap <silent> <C-l> <Right>
+" 设置文件头
+autocmd BufNewFile *.cpp,*.cc,*.[ch],*.py,*.sh exec ":call SetTitle()"
+func SetTitle()
+	"如果文件类型为.sh文件
+	if &filetype == 'sh'
+		call setline(1,"\#!/bin/bash")
+		call append(line("."), "")
+    elseif &filetype == 'python'
+        call setline(1,"#!/usr/bin/env python")
+        call append(line("."),"# coding=utf-8")
+	    call append(line(".")+1, "")
+	    call append(line(".")+2, "")
+	    call append(line(".")+3, "def main():")
+	    call append(line(".")+4, "  print 'hello, world'")
+	    call append(line(".")+5, "")
+	    call append(line(".")+6, "")
+	    call append(line(".")+7, "if __name__ == '__main__':")
+	    call append(line(".")+8, "  main()")
+	else
+		call setline(1, "/*************************************************************************")
+		call append(line("."), "	> File Name: ".expand("%"))
+		call append(line(".")+1, "	> Author: wuxiangwei")
+		call append(line(".")+2, "	> Mail: wuxiangwei@corp.netease.com")
+		call append(line(".")+3, "	> Created Time: ".strftime("%c"))
+		call append(line(".")+4, " ************************************************************************/")
+		call append(line(".")+5, "")
+	endif
+	if expand("%:e") == 'cpp'
+		call append(line(".")+6, "#include<iostream>")
+		call append(line(".")+7, "using namespace std;")
+		call append(line(".")+8, "")
+	endif
+	if &filetype == 'c'
+		call append(line(".")+6, "#include<stdio.h>")
+		call append(line(".")+7, "")
+	endif
+	if expand("%:e") == 'h'
+		call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
+		call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
+		call append(line(".")+8, "#endif")
+	endif
+endfunc
+autocmd BufNewFile * normal G
