@@ -88,7 +88,7 @@ nmap <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 0  " 打开tagbar时光标自动到tagbar窗口
 let g:tagbar_autoclose = 1  " 跳转后直接关闭tagbar窗口
 " 对指定后缀的文件，自动打开tagbar窗口
-autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.md,*.py call tagbar#autoopen()
+autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.md,*.py,*.sh call tagbar#autoopen()
 
 
 "" cscope配置
