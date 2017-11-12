@@ -38,11 +38,12 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'jszakmeister/markdown2ctags'
 Plugin 'joker1007/vim-markdown-quote-syntax'
 Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Shougo/neocomplete.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'Yggdroot/LeaderF'
-Plugin 'brookhong/cscope.vim'
+" Plugin 'brookhong/cscope.vim'
 Plugin 'tomasr/molokai'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'SirVer/ultisnips'
@@ -103,6 +104,7 @@ let g:Lf_DefaultMode = 'Fuzzy'
 let g:Lf_RootMarkers = ['.git']
 " 当前工作目录为最近的.git所在目录，避免使用当前路径找不到其它目录中的文件
 let g:Lf_WorkingDirectoryMode = 'a'  
+" let g:Lf_ShortcutF = '<C-P>'
 
 let g:Powerline_symbols = 'fancy'
 
@@ -138,7 +140,7 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 syntax on
-set colorcolumn=80
+set colorcolumn=81
 set t_Co=256
 " colorscheme solarized " 设置背景方案
 " colorscheme molokai " 设置背景方案
@@ -170,6 +172,7 @@ set autochdir
 " map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 
+set report=0
 set cmdheight=2
 set cmdheight=2
 set showcmd " 显示命令
@@ -189,7 +192,8 @@ set expandtab
 set smarttab " 为C程序提供自动缩进
 set number
 set history=1000
-set textwidth=120 " 设置每行120个字符自动换行
+" set textwidth=120 " 设置每行120个字符自动换行
+set textwidth=80 " 设置每行120个字符自动换行
 set autochdir " 自动切换当前目录为当前文件所在目录
 " Search and Case
 set hlsearch " 高亮
@@ -197,6 +201,8 @@ set incsearch
 set ignorecase " 忽略大小写
 set whichwrap+=<,>,h,l " 光标滑动到行的首尾时，左右滑动可以移动到上下行
 set showmatch " 高亮显示匹配的括号
+set matchtime=1  " 匹配括号高亮的时间（单位：十分之一秒）
+set iskeyword+=_,$,@,%,#,-  " 带有这些符号的单词不要被换行分割
 " 补全
 set wildmenu
 set wildmode=longest,full
@@ -217,6 +223,7 @@ au BufRead,BufNewFile SConstruct set filetype=python
 
 set autoread " 设置当文件被改动时自动载入
 set autowrite " 自动保存
+set confirm  " 在处理未保存或只读的文件时，弹出确认
 
 " No backup files
 set nobackup
