@@ -106,6 +106,10 @@ let g:Lf_RootMarkers = ['.git']
 let g:Lf_WorkingDirectoryMode = 'a'  
 " let g:Lf_ShortcutF = '<C-P>'
 
+
+" YouCompleteMe配置
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+
 let g:Powerline_symbols = 'fancy'
 
 set conceallevel=2
