@@ -147,8 +147,8 @@ syntax on
 set colorcolumn=81
 set t_Co=256
 " colorscheme solarized " 设置背景方案
-" colorscheme molokai " 设置背景方案
-colorscheme ron " 设置背景方案
+colorscheme molokai " 设置背景方案
+" colorscheme ron " 设置背景方案
 set background=dark " light\dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
@@ -158,7 +158,7 @@ set guifontset=
 set guifont=Source_Code_Pro:h11:cANSI
 
 
-nmap <F10> :NERDTreeToggle<CR>
+nmap <F3> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
