@@ -60,7 +60,7 @@ Plugin 'python-mode/python-mode'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'hashrocket/vim-macdown'
+" Plugin 'hashrocket/vim-macdown'
 
 call vundle#end()  " required
 filetype plugin indent on  " required
