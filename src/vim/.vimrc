@@ -88,7 +88,9 @@ nmap <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 0  " 打开tagbar时光标自动到tagbar窗口
 let g:tagbar_autoclose = 1  " 跳转后直接关闭tagbar窗口
 " 对指定后缀的文件，自动打开tagbar窗口
-autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.md,*.py,*.sh call tagbar#autoopen()
+" 不打开c、c++文件，否则搜索结果容易放入到
+" autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.md,*.py,*.sh call tagbar#autoopen()
+autocmd BufReadPost *.md,*.py,*.sh call tagbar#autoopen()
 
 
 "" cscope配置
@@ -169,6 +171,9 @@ let NERDTreeWinSize=31
 " let g:nerdtree_tabs_open_on_console_startup=1
 let NERDTreeIgnores=['\.pyc','\~$','\.swp']
 let NERDTreeShowBookmarks=1
+
+" vim-nerdtree-tabs 配置
+let g:nerdtree_tabs_open_on_console_startup=1  " 启动时开启
 
 
 set tags=tags;
