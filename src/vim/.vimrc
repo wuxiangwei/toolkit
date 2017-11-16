@@ -1,7 +1,7 @@
 set encoding=utf-8
 set termencoding=utf-8
 set fileformat=unix
-set relativenumber
+" set relativenumber
 
 set rtp+=~/.vim/bundle/Vundle.vim
 " set rtp+=~/.vim/bundle/solarized/vim-colors-solarized  " colors
@@ -60,7 +60,11 @@ Plugin 'python-mode/python-mode'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'honza/vim-snippets'
 " Plugin 'hashrocket/vim-macdown'
+" normal模式显示相对number，编辑模式显示正常number
+Plugin 'myusuf3/numbers.vim'
 
 call vundle#end()  " required
 filetype plugin indent on  " required
@@ -112,8 +116,12 @@ let g:Lf_WorkingDirectoryMode = 'a'
 " YouCompleteMe配置
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 
-let g:Powerline_symbols = 'fancy'
+" vim-indent-guides配置
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
 
+
+let g:Powerline_symbols = 'fancy'
 set conceallevel=2
 let g:vim_markdown_folding_disabled = 1
 
