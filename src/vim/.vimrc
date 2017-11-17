@@ -31,22 +31,19 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Plugin 'brantb/solarized'
+Plugin 'tomasr/molokai'
 Plugin 'altercation/ethanschoonover.com'
 Plugin 'majutsushi/tagbar'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'jszakmeister/markdown2ctags'
 Plugin 'joker1007/vim-markdown-quote-syntax'
-Plugin 'Valloric/YouCompleteMe'
 " Plugin 'Shougo/neocomplete.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'Yggdroot/LeaderF'
-" Plugin 'brookhong/cscope.vim'
-Plugin 'tomasr/molokai'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'SirVer/ultisnips'
+" Plugin 'vim-syntastic/syntastic'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'vim-scripts/AutoClose'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -56,17 +53,26 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'bronson/vim-trailing-whitespace'
 " Plugin 'vim-scripts/c.vim'
-Plugin 'python-mode/python-mode'
-Plugin 'Raimondi/delimitMate'
+" Plugin 'python-mode/python-mode'
+" Plugin 'Raimondi/delimitMate'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tenfyzhong/CompleteParameter.vim'
 " Plugin 'hashrocket/vim-macdown'
 " normal模式显示相对number，编辑模式显示正常number
 Plugin 'myusuf3/numbers.vim'
+Plugin 'MattesGroeger/vim-bookmarks'
 
 call vundle#end()  " required
+
+syntax on
+" filetype on
+filetype indent on
+" filetype plugin on
 filetype plugin indent on  " required
 " End vundle
 
@@ -109,12 +115,28 @@ set cspc=3 " 显示路径，显示路径的最后3个部分
 let g:Lf_DefaultMode = 'Fuzzy'
 let g:Lf_RootMarkers = ['.git']
 " 当前工作目录为最近的.git所在目录，避免使用当前路径找不到其它目录中的文件
-let g:Lf_WorkingDirectoryMode = 'a'  
+let g:Lf_WorkingDirectoryMode = 'a'
 " let g:Lf_ShortcutF = '<C-P>'
+
+" ultisnips 配置
+" let g:UltiSnipsExpandTrigger="<C-z>"
 
 
 " YouCompleteMe配置
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+" 指定能够触发语义补全的字符
+" g:ycm_semantic_triggers
+" 触发语义补全，默认情况，insert模式下输入:->::会自动触发
+" let g:ycm_key_invoke_completion = '<C-Space>'
+" let g:ycm_use_ultisnips_completer = 1
+" let g:ycm_key_invoke_completion = '<C-a>'
+" inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<CR>" 
+" set completeopt=longest,menu
+
+" CompleteParameter配置
+" inoremap <silent><expr> ( complete_parameter#pre_complete("()")
 
 " vim-indent-guides配置
 let g:indent_guides_enable_on_vim_startup = 1
@@ -153,7 +175,6 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-syntax on
 set colorcolumn=81
 set t_Co=256
 " colorscheme solarized " 设置背景方案
@@ -223,8 +244,8 @@ set iskeyword+=_,$,@,%,#,-  " 带有这些符号的单词不要被换行分割
 " 补全
 set wildmenu
 set wildmode=longest,full
-set completeopt=menu,menuone,longest
-" set completeopt=preview,menu " 代码补全
+" set completeopt=menu,menuone,longest
+set completeopt=preview,menu " 代码补全
 set switchbuf=useopen,usetab
 set shortmess=a
 " Rule
@@ -232,9 +253,6 @@ set noshowmode
 set ruler " 显示光标所在的行、列坐标
 set winaltkeys=no " Window中alt键来选择编辑器的菜单
 
-filetype on
-filetype plugin on
-filetype indent on
 
 au BufRead,BufNewFile SConstruct set filetype=python
 
@@ -279,11 +297,11 @@ func SetTitle()
 	    call append(line(".")+1, "")
 	    call append(line(".")+2, "")
 	    call append(line(".")+3, "def main():")
-	    call append(line(".")+4, "  print 'hello, world'")
+	    call append(line(".")+4, "    print 'hello, world'")
 	    call append(line(".")+5, "")
 	    call append(line(".")+6, "")
 	    call append(line(".")+7, "if __name__ == '__main__':")
-	    call append(line(".")+8, "  main()")
+	    call append(line(".")+8, "    main()")
 	else
 		call setline(1, "/*************************************************************************")
 		call append(line("."), "	> File Name: ".expand("%"))
