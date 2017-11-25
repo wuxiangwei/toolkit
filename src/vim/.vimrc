@@ -1,11 +1,8 @@
 set encoding=utf-8
 set termencoding=utf-8
 set fileformat=unix
-" set relativenumber
 
 set rtp+=~/.vim/bundle/Vundle.vim
-" set rtp+=~/.vim/bundle/solarized/vim-colors-solarized  " colors
-set rtp+=~/.vim/bundle/ethanschoonover.com/projects/solarized/vim-colors-solarized " colors
 set rtp+=~/.vim/bundle/molokai
 
 if has("win32")
@@ -28,6 +25,7 @@ endif
 " Begin vundle
 filetype off  " required
 call vundle#begin()
+
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Plugin 'brantb/solarized'
@@ -38,12 +36,12 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'jszakmeister/markdown2ctags'
 Plugin 'joker1007/vim-markdown-quote-syntax'
-" Plugin 'Shougo/neocomplete.vim'
+
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'Yggdroot/LeaderF'
-" Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'vim-scripts/AutoClose'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -52,27 +50,27 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'bronson/vim-trailing-whitespace'
-" Plugin 'vim-scripts/c.vim'
 " Plugin 'python-mode/python-mode'
-" Plugin 'Raimondi/delimitMate'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'tenfyzhong/CompleteParameter.vim'
-" Plugin 'hashrocket/vim-macdown'
 " normal模式显示相对number，编辑模式显示正常number
 Plugin 'myusuf3/numbers.vim'
+" 书签
 Plugin 'MattesGroeger/vim-bookmarks'
+
+" 符号自动补全
+Plugin 'Raimondi/delimitMate'
 
 call vundle#end()  " required
 
 syntax on
-" filetype on
+filetype on
 filetype indent on
-" filetype plugin on
+filetype plugin on
 filetype plugin indent on  " required
 " End vundle
 
@@ -119,21 +117,30 @@ let g:Lf_WorkingDirectoryMode = 'a'
 " let g:Lf_ShortcutF = '<C-P>'
 
 " ultisnips 配置
-" let g:UltiSnipsExpandTrigger="<C-z>"
-
+let g:UltiSnipsEditSplit = 'vertical'
+let g:UltiSnipsSnippetsDir = '~/.vim/bundle/vim-snippets/UltiSnips'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " YouCompleteMe配置
+set completeopt=longest,menu  " 让vim补全菜单的行为与一般IDE一致
+" 离开插入模式后自动关闭预览窗口
+" pumvisible函数用于判断下拉菜单是否显示
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+let g:ycm_key_invoke_completion = '<C-a>'  " 触发补全
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
-" 指定能够触发语义补全的字符
-" g:ycm_semantic_triggers
-" 触发语义补全，默认情况，insert模式下输入:->::会自动触发
-" let g:ycm_key_invoke_completion = '<C-Space>'
-" let g:ycm_use_ultisnips_completer = 1
-" let g:ycm_key_invoke_completion = '<C-a>'
-" inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<CR>" 
-" set completeopt=longest,menu
+let g:ycm_collect_identifiers_from_tags_files=1  " 开启 YCM 基于标签引擎
+let g:ycm_min_num_of_chars_for_completion=2  " 从第2个键入字符就开始罗列匹配项
+let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_seed_identifiers_with_syntax=1  " 语法关键字补全
+let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
+let g:ycm_complete_in_strings = 1  "在字符串输入中也能补全
+" 注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+let g:clang_user_options='|| exit 0'
 
 " CompleteParameter配置
 " inoremap <silent><expr> ( complete_parameter#pre_complete("()")
@@ -197,14 +204,12 @@ let NERDTreeShowLineNumbers=1
 let NERDTreeAutoCenter=1
 let NERDTreeShowHidden=1
 let NERDTreeWinSize=31
-" let g:nerdtree_tabs_open_on_console_startup=1
 let NERDTreeIgnores=['\.pyc','\~$','\.swp']
 let NERDTreeShowBookmarks=1
-
 " vim-nerdtree-tabs 配置
-let g:nerdtree_tabs_open_on_console_startup=1  " 启动时开启
+let g:nerdtree_tabs_open_on_console_startup=0  " 启动时开启
 
-
+" 配置ctags
 set tags=tags;
 set autochdir
 " map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
@@ -216,7 +221,7 @@ set cmdheight=2
 set showcmd " 显示命令
 set nocompatible
 set cursorline " 高亮当前行
-set paste " 设置粘贴模式，使粘贴不错位
+" set paste " 设置粘贴模式，使粘贴不错位，同ultisnips冲突，要禁用
 set novisualbell " 设置不闪烁
 set wrap " 自动换行
 set autoindent " 继承前行的缩进方式
@@ -230,10 +235,7 @@ set expandtab
 set smarttab " 为C程序提供自动缩进
 set number
 set history=1000
-" set textwidth=120 " 设置每行120个字符自动换行
 set textwidth=80 " 设置每行120个字符自动换行
-set autochdir " 自动切换当前目录为当前文件所在目录
-" Search and Case
 set hlsearch " 高亮
 set incsearch
 set ignorecase " 忽略大小写
@@ -244,8 +246,6 @@ set iskeyword+=_,$,@,%,#,-  " 带有这些符号的单词不要被换行分割
 " 补全
 set wildmenu
 set wildmode=longest,full
-" set completeopt=menu,menuone,longest
-set completeopt=preview,menu " 代码补全
 set switchbuf=useopen,usetab
 set shortmess=a
 " Rule
@@ -253,14 +253,10 @@ set noshowmode
 set ruler " 显示光标所在的行、列坐标
 set winaltkeys=no " Window中alt键来选择编辑器的菜单
 
-
-au BufRead,BufNewFile SConstruct set filetype=python
-
 set autoread " 设置当文件被改动时自动载入
 set autowrite " 自动保存
 set confirm  " 在处理未保存或只读的文件时，弹出确认
 
-" No backup files
 set nobackup
 set nowritebackup
 set noswapfile
@@ -270,18 +266,6 @@ set noswapfile
 " set foldmethod=syntax
 " 使用空格来打开关闭折叠
 nnoremap zc @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-
-" 自动括号
-" inoremap ( ()<ESC>i
-" inoremap { {}<ESC>i
-" nnoremap <leader>h <C-w>h
-" nnoremap <leader>j <C-w>j
-" nnoremap <leader>k <C-w>k
-" nnoremap <leader>l <C-w>l
-" inoremap <silent> <C-h> <Left>
-" inoremap <silent> <C-j> <Down>
-" inoremap <silent> <C-k> <Up>
-" inoremap <silent> <C-l> <Right>
 
 
 " 设置文件头
@@ -327,3 +311,8 @@ func SetTitle()
 	endif
 endfunc
 autocmd BufNewFile * normal G
+
+" 将Sconstruct文件视为python文件
+au BufRead,BufNewFile SConstruct set filetype=python
+
+
