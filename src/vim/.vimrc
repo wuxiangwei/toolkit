@@ -52,13 +52,16 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'bronson/vim-trailing-whitespace'
 " Plugin 'python-mode/python-mode'
 Plugin 'Chiel92/vim-autoformat'
+" 注释添加、删除，同样的快捷键不同文件类型不同注释，同时支持.vimrc文件
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
+" "Plugin 'tenfyzhong/CompleteParameter.vim'
 " normal模式显示相对number，编辑模式显示正常number
 Plugin 'myusuf3/numbers.vim'
+
 " 书签
 Plugin 'MattesGroeger/vim-bookmarks'
 
@@ -217,7 +220,6 @@ set autochdir
 
 set report=0
 set cmdheight=2
-set cmdheight=2
 set showcmd " 显示命令
 set nocompatible
 set cursorline " 高亮当前行
@@ -314,5 +316,3 @@ autocmd BufNewFile * normal G
 
 " 将Sconstruct文件视为python文件
 au BufRead,BufNewFile SConstruct set filetype=python
-
-
