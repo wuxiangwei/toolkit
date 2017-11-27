@@ -4,6 +4,7 @@ set fileformat=unix
 
 set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/molokai
+set rtp+=~/.vim/bundle/gruvbox
 
 if has("win32")
     set fileencoding=chinese
@@ -30,6 +31,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 " Plugin 'brantb/solarized'
 Plugin 'tomasr/molokai'
+Plugin 'morhetz/gruvbox'
 Plugin 'altercation/ethanschoonover.com'
 Plugin 'majutsushi/tagbar'
 Plugin 'godlygeek/tabular'
@@ -56,7 +58,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plugin 'wuxiangwei/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
 " "Plugin 'tenfyzhong/CompleteParameter.vim'
 " normal模式显示相对number，编辑模式显示正常number
@@ -67,6 +69,7 @@ Plugin 'MattesGroeger/vim-bookmarks'
 
 " 符号自动补全
 Plugin 'Raimondi/delimitMate'
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()  " required
 
@@ -188,7 +191,8 @@ au Syntax * RainbowParenthesesLoadBraces
 set colorcolumn=81
 set t_Co=256
 " colorscheme solarized " 设置背景方案
-colorscheme molokai " 设置背景方案
+" colorscheme molokai " 设置背景方案
+colorscheme gruvbox " 设置背景方案
 " colorscheme ron " 设置背景方案
 set background=dark " light\dark
 let g:solarized_termcolors=256
