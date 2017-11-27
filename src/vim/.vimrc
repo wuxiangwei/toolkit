@@ -163,6 +163,12 @@ let g:vim_markdown_folding_disabled = 1
 
 let g:markdown_quote_syntax_on_filetypes = ['text']
 
+
+" nerdcommenter配置
+let g:NERDSpaceDelims=1  " 注释符号后添加1个空格
+
+
+" rainbow_parentheses 配置
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
     \ ['Darkblue',    'SeaGreen3'],
@@ -188,6 +194,7 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+
 set colorcolumn=81
 set t_Co=256
 " colorscheme solarized " 设置背景方案
@@ -203,6 +210,7 @@ set guifontset=
 set guifont=Source_Code_Pro:h11:cANSI
 
 
+" nerdtree配置
 nmap <F3> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -213,10 +221,13 @@ let NERDTreeShowHidden=1
 let NERDTreeWinSize=31
 let NERDTreeIgnores=['\.pyc','\~$','\.swp']
 let NERDTreeShowBookmarks=1
+
+
 " vim-nerdtree-tabs 配置
 let g:nerdtree_tabs_open_on_console_startup=0  " 启动时开启
 
-" 配置ctags
+
+" ctags配置
 set tags=tags;
 set autochdir
 " map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
