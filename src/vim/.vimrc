@@ -165,7 +165,7 @@ let g:markdown_quote_syntax_on_filetypes = ['text']
 
 
 " nerdcommenter配置
-let g:NERDSpaceDelims=1  " 注释符号后添加1个空格
+let g:NERDSpaceDelims=1 " 注释符号后添加1个空格
 
 
 " rainbow_parentheses 配置
@@ -231,6 +231,25 @@ let g:nerdtree_tabs_open_on_console_startup=0  " 启动时开启
 set tags=tags;
 set autochdir
 " map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
+" easymotion 配置
+" 原理同浏览器的vimoperator相同，搜索出目标后，使用字母标记，点击字母跳转到目标
+map f <Plug>(easymotion-prefix)
+" 全屏搜索1个字符
+map ff <Plug>(easymotion-s)
+" 向下搜索1个字符
+map fs <Plug>(easymotion-f)
+" 不同行间跳转，j乡下，k向上
+map fj <Plug>(easymotion-j)
+map fk <Plug>(easymotion-k)
+" 同行内不同word间跳转，h向左，l向右
+map fh <Plug>(easymotion-linebackward)
+map fl <Plug>(easymotion-lineforward)
+" 多字符搜索
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+" 忽略大小写
+let g:EasyMotion_smartcase = 1
 
 
 set report=0
