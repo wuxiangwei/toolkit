@@ -1,0 +1,29 @@
+# env variable: BS, TYPE, DEVICE
+[global]
+
+group_reporting
+
+# size=200G
+time_based=1
+runtime=10 # seconds
+
+thread
+direct=1
+
+bs=4k
+rw=randwrite
+numjobs=1
+
+ioengine=libaio
+name=/dev/sdk
+
+[/dev/sdk]
+stonewall
+iodepth=64
+
+
+# Log的输出格式：time,value,data direction
+# data direction: 0为read，1为write，2为trim
+
+log_avg_msec=1000  # milliseconds，采样的时间间隔
+write_iops_log=xw  # 前缀
