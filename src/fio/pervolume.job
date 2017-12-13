@@ -5,7 +5,9 @@ group_reporting
 
 # size=200G
 time_based
-runtime=1 # seconds
+# runtime=60 # seconds 测试fio配置用
+# runtime=4000 # seconds
+runtime=2000 # seconds
 
 thread
 direct=1
@@ -17,29 +19,37 @@ numjobs=1
 ioengine=rbd
 invalidate=0 # mandatory
 clientname=admin
-pool=nbs
+pool=rbd
 rbdname=${DEVICE}
 
-[iodepth_1]
-stonewall
-iodepth=1
+# [iodepth_1]
+# stonewall
+# iodepth=1
+#
+# [iodepth_4]
+# stonewall
+# iodepth=4
+#
+# [iodepth_8]
+# stonewall
+# iodepth=8
+#
+# [iodepth_16]
+# stonewall
+# iodepth=16
+#
+# [iodepth_32]
+# stonewall
+# iodepth=32
 
-[iodepth_4]
-stonewall
-iodepth=4
+[iodepth_128]
+iodepth=128
 
-[iodepth_8]
-stonewall
-iodepth=8
+# Log的输出格式：time,value,data direction
+# data direction: 0为read，1为write，2为trim
 
-[iodepth_16]
-stonewall
-iodepth=16
+log_avg_msec=1000 # milliseconds，采样的时间间隔
+# write_iops_log=xw  # 前缀
 
-[iodepth_32]
-stonewall
-iodepth=32
-
-[iodepth_64]
-stonewall
-iodepth=64
+log_hist_msec=1000
+write_lat_log=xw

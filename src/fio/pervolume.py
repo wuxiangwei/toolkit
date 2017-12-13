@@ -56,12 +56,13 @@ def main():
     device = 'vm1'
     tasks = [
         # (BS, TYPE)
-        ('4k', 'randwrite'),
-        ('4k', 'randread'),
-        ('4k', 'readwrite'),
-        ('512k', 'write'),
-        ('512k', 'read'),
-        ('512k', 'readwrite'),
+        #  ('4k', 'randwrite'),
+        ('4k', 'write'),
+        # ('4k', 'randread'),
+        # ('4k', 'readwrite'),
+        # ('512k', 'write'),
+        # ('512k', 'read'),
+        # ('512k', 'readwrite'),
     ]
 
     init()
