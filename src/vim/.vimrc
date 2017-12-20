@@ -45,31 +45,36 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'Yggdroot/LeaderF'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'derekwyatt/vim-fswitch'
-Plugin 'vim-scripts/AutoClose'
+" Plugin 'vim-scripts/AutoClose' " 使用delimitMate
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'chazy/cscope_maps'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+" 显示行末空格，执行FixWhitespace命令，删除行末多余空格
 Plugin 'bronson/vim-trailing-whitespace'
 " Plugin 'python-mode/python-mode'
 Plugin 'Chiel92/vim-autoformat'
 " 注释添加、删除，同样的快捷键不同文件类型不同注释，同时支持.vimrc文件
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'Yggdroot/indentLine'
 Plugin 'SirVer/ultisnips'
 Plugin 'wuxiangwei/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
 " "Plugin 'tenfyzhong/CompleteParameter.vim'
 " normal模式显示相对number，编辑模式显示正常number
 Plugin 'myusuf3/numbers.vim'
-
 " 书签
 Plugin 'MattesGroeger/vim-bookmarks'
-
 " 符号自动补全
 Plugin 'Raimondi/delimitMate'
+" git插件
 Plugin 'tpope/vim-fugitive'
+" 多行编辑
+Plugin 'terryma/vim-multiple-cursors'
+" 搜索
+Plugin 'mileszs/ack.vim'
 
 call vundle#end()  " required
 
@@ -148,12 +153,18 @@ let g:ycm_complete_in_strings = 1  "在字符串输入中也能补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:clang_user_options='|| exit 0'
 
+
 " CompleteParameter配置
 " inoremap <silent><expr> ( complete_parameter#pre_complete("()")
 
 " vim-indent-guides配置
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_start_level = 2
+" let g:indent_guides_guide_size = 1
+" let g:indent_guides_tab_guides = 1
+
+" indentLine配置
+let g:indentLine_setColors = 0
 
 
 let g:Powerline_symbols = 'fancy'
@@ -165,7 +176,7 @@ let g:markdown_quote_syntax_on_filetypes = ['text']
 
 
 " nerdcommenter配置
-let g:NERDSpaceDelims=1 " 注释符号后添加1个空格
+let g:NERDSpaceDelims=1
 
 
 " rainbow_parentheses 配置
